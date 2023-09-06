@@ -4,10 +4,11 @@ import {
   pollForFileData,
   UploadThingError,
 } from "@uploadthing/shared";
+import type { File } from "undici";
 
 import { maybeParseResponseXML } from "../internal/s3-error-parser";
 
-export type FileEsque = Blob & { name: string };
+export type FileEsque = Blob & { name: string } | File; // undici's File doesn't work with `Blob` as it's missing .prototype
 
 export type UploadData = {
   key: string;
